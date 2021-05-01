@@ -1,5 +1,8 @@
 package br.anderson.tasks.api.test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,8 +33,11 @@ public class APITest {
 	@Test
 	public void deveAdicionarTaskComSucesso() {
 		
+		SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+		String data = formatador.format(new Date());
+		
 		RestAssured.given()
-			.body("{ \"task\": \"Teste Via API\", \"dueDate\": \"2021-04-01\" }")
+			.body("{ \"task\": \"Teste Via API\", \"dueDate\": \""+data+"\" }")
 			.contentType(ContentType.JSON)
 		.when()
 			.post("/todo")
